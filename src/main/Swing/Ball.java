@@ -88,8 +88,8 @@ public class Ball extends JPanel implements Runnable {
 
         this.setOpaque(false);
 
-        vx = 1;
-        vy = 1;
+        vx = xvelocity;
+        vy = yvelocity;
 
         new Thread(this).start();
 
