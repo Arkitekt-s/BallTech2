@@ -30,13 +30,10 @@ public class Ball extends JPanel implements Runnable {
 
     Color color;
     static int diameter;
-    long delay;
     private int vx;
     private int vy;
 
     public static boolean borderColl(int thisBallX, int thisBallY) {
-        Ball.otherBallX = otherBallX;
-        Ball.otherBallY = otherBallY;
         //DistanceSquared between the points
         int distSq = (otherBallX - thisBallX) * (otherBallX - thisBallX) + (otherBallY - thisBallY) * (otherBallY - thisBallY);
         //Squared sum of radiuses
@@ -44,8 +41,7 @@ public class Ball extends JPanel implements Runnable {
         //
         if (distSq > radSumSq) {
             return false;
-        } else
-            //System.out.println("there was a collision");
+        }
         return true;
     }
 
@@ -54,28 +50,6 @@ public class Ball extends JPanel implements Runnable {
             color = Color.red;
         } else if (ballcolor == "blue") {
             color = Color.blue;
-        } else if (ballcolor == "black") {
-            color = Color.black;
-        } else if (ballcolor == "cyan") {
-            color = Color.cyan;
-        } else if (ballcolor == "darkGray") {
-            color = Color.darkGray;
-        } else if (ballcolor == "gray") {
-            color = Color.gray;
-        } else if (ballcolor == "green") {
-            color = Color.green;
-        } else if (ballcolor == "yellow") {
-            color = Color.yellow;
-        } else if (ballcolor == "lightGray") {
-            color = Color.lightGray;
-        } else if (ballcolor == "magenta") {
-            color = Color.magenta;
-        } else if (ballcolor == "orange") {
-            color = Color.orange;
-        } else if (ballcolor == "pink") {
-            color = Color.pink;
-        } else if (ballcolor == "white") {
-            color = Color.white;
         }
         diameter = 120;
 
@@ -90,9 +64,6 @@ public class Ball extends JPanel implements Runnable {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
-        int x = getX();
-        int y = getY();
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -150,7 +121,6 @@ public class Ball extends JPanel implements Runnable {
         }
         //getsLocation
         int x = getX();
-        //System.out.println("the ball is in xpos "+ x);
         int y = getY();
 
         //Check border collision
@@ -158,7 +128,6 @@ public class Ball extends JPanel implements Runnable {
             vx *= -1;
             vy *= -1;
         }
-
         //Check X Border
         if (x + vx < 0 || x + diameter + vx > getParent().getWidth()) {
             vx *= -1;
@@ -175,8 +144,7 @@ public class Ball extends JPanel implements Runnable {
         setSize(getPreferredSize());
         setLocation(x, y);
         setPos(x,y);
-        //System.out.println("The "+this.color+" ball moved to: x" +x+ ", y"+y);
-        //System.out.println(this.color+ " ball releases the permit.");
+
         sem.release();
         try {
             Thread.sleep(5);

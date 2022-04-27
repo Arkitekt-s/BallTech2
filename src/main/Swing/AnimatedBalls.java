@@ -7,7 +7,6 @@ public class AnimatedBalls {
             @Override
             public void run() {
                 JFrame frame = new JFrame();
-                //frame.setLocationRelativeTo(null);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLayout(new BorderLayout());
                 frame.add(new Balls());
