@@ -17,22 +17,26 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class MultipleBounceBall extends Application {
+public class MultipleBounceBall extends Application implements Runnable {
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) {
-        MultipleBallPane ballPane = new MultipleBallPane();
+       MultipleBallPane ballPane = new MultipleBallPane();
+        //BallPane2 ballPane = new BallPane2();
         ballPane.setStyle("-fx-border-color: black");
 
 
         Button btAdd = new Button("+");
+        Button print = new Button("print");
         Button btSubtract = new Button("-");
         HBox hBox = new HBox(10);
-        hBox.getChildren().addAll(btAdd, btSubtract);
+        hBox.getChildren().addAll(btAdd, btSubtract,print);
         hBox.setAlignment(Pos.CENTER);
 
         // Add or remove a ball
+
         btAdd.setOnAction(e -> ballPane.add());
         btSubtract.setOnAction(e -> ballPane.subtract());
+        print.setOnAction(e -> ballPane.print());
 
         // Pause and resume animation
         ballPane.setOnMousePressed(e -> ballPane.pause());
@@ -72,5 +76,12 @@ public class MultipleBounceBall extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+
+    }
+
+    @Override
+    public void run() {
+
     }
 }

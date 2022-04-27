@@ -23,13 +23,31 @@ public class MultipleBallPane extends Pane {
 
 
     public void add() {
+        if (getChildren().size() < 2) {
+            Color color = new Color(Math.random(),
+                    Math.random(), Math.random(), 0.5);
+            getChildren().add(new Ball(30, 30, 20, color));
+        }
+
+        for (Node node : this.getChildren()) {
+            Ball ball = (Ball) node;
+            for (Node node2 : this.getChildren()) {
+                Ball ball2 = (Ball) node2;
+               }
+            }
+
+    }
+
+    public void add2() {
         Color color = new Color(Math.random(),
                 Math.random(), Math.random(), 0.5);
         getChildren().add(new Ball(30, 30, 20, color));
 
-
-
+        Color color2 = new Color(Math.random(),
+                Math.random(), Math.random(), 0.5);
+        getChildren().add(new Ball(100, 100, 20, color));
     }
+
 
     public void subtract() {
         if (getChildren().size() > 0) {
@@ -37,6 +55,9 @@ public class MultipleBallPane extends Pane {
         }
     }
 
+    public void print() {
+        System.out.println(getChildren().size());
+    }
 
     public void play() {
         animation.play();
@@ -59,10 +80,13 @@ public class MultipleBallPane extends Pane {
         return animation.rateProperty();
     }
 
+
     public void moveBall() {
-        for (Node node: this.getChildren()) {
-            Ball ball = (Ball)node;
+        for (Node node : this.getChildren()) {
+            Ball ball = (Ball) node;
             // Check boundaries
+            //getCenterX =
+
             if (ball.getCenterX() < ball.getRadius() ||
                     ball.getCenterX() > getWidth() - ball.getRadius()) {
                 ball.dx *= -1; // Change ball move direction
@@ -72,21 +96,19 @@ public class MultipleBallPane extends Pane {
                 ball.dy *= -1;// Change ball move direction
             }
 
-            // Adjust ball position
-            ball.setCenterX(ball.dx + ball.getCenterX());
-            ball.setCenterY(ball.dy + ball.getCenterY());
+
             //make shore when the ball is meet each other bounce back
-            for (Node node2: this.getChildren()) {
-                Ball ball2 = (Ball)node2;
+            for (Node node2 : this.getChildren()) {
+                Ball ball2 = (Ball) node2;
                 if (ball != ball2) {
-                    if (ball.getBoundsInParent().intersects(ball2.getBoundsInParent())) {
+                    if (ball.getBoundsInLocal().intersects(ball2.getBoundsInLocal())) {
                         ball.dx *= -1;
                         ball.dy *= -1;
                         ball2.dx *= -1;
                         ball2.dy *= -1;
 
                     }
-//no balls should be in the same place
+                    //no balls should be in the same place
                     if (ball.getCenterX() == ball2.getCenterX() &&
                             ball.getCenterY() == ball2.getCenterY()) {
                         ball.dx *= -1;
@@ -98,6 +120,14 @@ public class MultipleBallPane extends Pane {
 
                 }
             }
+
+
+            // Adjust ball position
+            ball.setCenterX(ball.dx + ball.getCenterX());
+            ball.setCenterY(ball.dy + ball.getCenterY());
+
         }
     }
+
+
 }
