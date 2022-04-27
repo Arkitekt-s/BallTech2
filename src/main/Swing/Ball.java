@@ -1,5 +1,3 @@
-
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +12,7 @@ public class Ball extends JPanel implements Runnable {
 
     static {
         try {
-            img = ImageIO.read(new File("/Users/filippo/Downloads/dvd.png"));
+            img = ImageIO.read(new File("src/main/Swing/dvd.png"));
         } catch (IOException e) {
             System.out.println("Failed to load the image");
             e.printStackTrace();
@@ -25,15 +23,10 @@ public class Ball extends JPanel implements Runnable {
     public static int otherBallY;
     public static Semaphore sem = new Semaphore(1);
 
-
-
     public static void setPos(int otherBallX, int otherBallY) {
         Ball.otherBallX = otherBallX;
         Ball.otherBallY = otherBallY;
     }
-    
-
-    
 
     Color color;
     static int diameter;
@@ -92,7 +85,6 @@ public class Ball extends JPanel implements Runnable {
         vy = yvelocity;
 
         new Thread(this).start();
-
     }
 
     protected void paintComponent(Graphics g) {
@@ -150,7 +142,6 @@ public class Ball extends JPanel implements Runnable {
         }
     }
 
-
     public void move() {
         try {
             sem.acquire();
@@ -192,6 +183,5 @@ public class Ball extends JPanel implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }

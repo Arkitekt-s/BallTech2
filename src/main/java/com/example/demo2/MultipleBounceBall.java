@@ -24,7 +24,6 @@ public class MultipleBounceBall extends Application implements Runnable {
         //BallPane2 ballPane = new BallPane2();
         ballPane.setStyle("-fx-border-color: black");
 
-
         Button btAdd = new Button("+");
         Button print = new Button("print");
         Button btSubtract = new Button("-");
@@ -34,8 +33,13 @@ public class MultipleBounceBall extends Application implements Runnable {
 
         // Add or remove a ball
 
-        btAdd.setOnAction(e -> ballPane.add());
-        btSubtract.setOnAction(e -> ballPane.subtract());
+        Thread ballThread = new Thread(){
+            public void run() {
+                btAdd.setOnAction(e -> ballPane.add());
+                btSubtract.setOnAction(e -> ballPane.subtract());
+                System.out.println("New ball thread");
+            }
+        };
         print.setOnAction(e -> ballPane.print());
 
         // Pause and resume animation
@@ -59,13 +63,6 @@ public class MultipleBounceBall extends Application implements Runnable {
         primaryStage.setScene(scene); // Place the scene in the stage
         primaryStage.show(); // Display the stage
     }
-
-
-
-
-
-
-
 
     /**
      * The main method is only needed for the IDE with limited
