@@ -10,9 +10,10 @@ public class AnimatedBalls {
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLayout(new BorderLayout());
                 frame.add(new Balls());
-                frame.setSize(800, 600);
-                frame.getContentPane().setBackground(Color.black);
+                frame.setSize(1000, 800);
+                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
+
             }
         });
     }
